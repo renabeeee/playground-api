@@ -10,7 +10,7 @@ class CreateUsers < ActiveRecord::Migration[7.1]
       t.string :location
       t.string :birthdate
       t.string :experience
-      t.string :status, default: "player"
+      t.string :status, default: "Player"
       t.string :profile_image
       t.timestamps
     end

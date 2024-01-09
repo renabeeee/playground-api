@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :authenticate_admin, except: [:index, :show]
+  before_action :authenticate_user, except: [:index, :show]
 
   def index
     @games = Game.all
@@ -12,21 +12,19 @@ class GamesController < ApplicationController
   end
 
   def create
-
     if current_user
       @game = Game.new(
-      user_id: params[:user_id],
-      location: params["location"],
-      date: params["date"],
-      time: params["time"],
-      intensity: params["intensity"],
-      player_limit: params["player_limit"],
-      image_url: params["image_url"],
-      description: params["description"],
-
+      user_id: current_user.id,
+      location: params[:location],
+      date: params[:date],
+      time: params[:time],
+      intensity: params[:intensity],
+      player_limit: params[:player_limit],
+      image_url: params[:image_url],
+      description: params[:description],
   )
     if @game.save #happy path
-      @game.status = "Game Leader"
+      current_user.update(status: "Game Leader")
       render :show
     else #sad path
       render json: { errors: @game.errors.full_messages}, status: :unprocessable_entity
@@ -37,34 +35,39 @@ class GamesController < ApplicationController
   end
 
   def update
-    if current_user
-    @game = Game.find_by(id: params["id"])
+    @game = Game.find(params[:id])
+
+    unless current_user && current_user.id == @game.user_id
+        render json: { errors: "Unauthorized to update this game" }, status: :unauthorized
+        return
+    end
 
     @game.update(
-			description: params["description"] || @game.description,
-      location: params["location"] || @game.location,
-      date: params["date"] || @game.date,
-      time: params["time"] || @game.time,
-      intensity: params["intensity"] || @game.intensity,
-      player_limit: params["player_limit"] || @game.player_limit,
-	    image_url: params["image_url"] || @game.image_url
+			description: params[:description],
+      location: params[:location],
+      date: params[:date],
+      time: params[:time],
+      intensity: params[:intensity],
+      player_limit: params[:player_limit],
+	    image_url: params[:image_url]
     )
 
-    if @game.save #happy path
-      render :show
-    else #sad path
-      render json: { errors: @game.errors.full_messages }, status: :unprocessable_entity
+      if @game.save #happy path
+        render :show
+      else #sad path
+        render json: { errors: @game.errors.full_messages }, status: :unprocessable_entity
+      end
     end
-    end
-  end
 
   def destroy
-    if current_user
+    @game = Game.find(params[:id])
 
-    game = Game.find_by(id: params["id"])
-    game.destroy
-
-    render json: {message: "Your game was deleted."}
+    unless current_user && current_user.id == @game.user_id
+      render json: { errors: "Unauthorized to delete this game" }, status: :unauthorized
+      return
     end
+
+    @game.destroy
+    render json: {message: "Your game was deleted."}
   end
 end

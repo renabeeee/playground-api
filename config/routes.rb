@@ -9,6 +9,11 @@ Rails.application.routes.draw do
 
   #Users Model
   post "/users" => "users#create"
+  delete "/users/:id" => "users#destroy"
+  patch "/users/:id" => "users#update"
+
+  #Sessions Model
+  post "/sessions" => "sessions#create"
 
   #Rsvps Model
   get "/rsvps" => "rsvps#index"
