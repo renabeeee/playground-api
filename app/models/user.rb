@@ -3,6 +3,9 @@ class User < ApplicationRecord
   has_many :rsvps, dependent: :destroy
   has_many :games, through: :rsvps
 
+  has_many :orders
+	has_many :carted_products
+
   validates :first_name, :last_name, :username, :email, :location, :birthdate, :experience, presence: true
 
   validates :email, uniqueness: true
