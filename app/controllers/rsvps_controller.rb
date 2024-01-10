@@ -19,7 +19,7 @@ class RsvpsController < ApplicationController
       if @rsvp.save
         render json: { message: "You're in! " }
       else
-        render json: { errors: @rsvp.errors.full_messages }, status: :unprocessable_entity
+        render json: { errors: [@rsvp.errors, "You're already RSVP'd to this game"], status: :unprocessable_entity }
       end
     end
 
