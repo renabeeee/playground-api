@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   #Users Model
   post "/users" => "users#create"
+  get "/users/:id" => "users#show"
   delete "/users/:id" => "users#destroy"
   patch "/users/:id" => "users#update"
 

@@ -1,6 +1,12 @@
 class UsersController < ApplicationController
+  # before_action :authenticate_user
 
-def create
+  def show
+    @user = User.find_by(id: params[:id])
+	  render :show
+  end
+
+  def create
     user = User.new(
       first_name: params[:first_name],
       last_name: params[:last_name],
@@ -19,7 +25,7 @@ def create
     else
       render json: { errors: user.errors.full_messages }, status: :bad_request
     end
-  end
+    end
 
   def update
     if current_user
@@ -47,9 +53,9 @@ def create
       render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
     end
   end
-end
+  end
 
-    def destroy
+  def destroy
       unless current_user && current_user.id == params[:id].to_i
         render json: { errors: "Unauthorized to delete this account" }, status: :unauthorized
       end
@@ -57,5 +63,5 @@ end
       current_user.destroy
         render json: { message: "Your account was deleted." }
 
-    end
   end
+end

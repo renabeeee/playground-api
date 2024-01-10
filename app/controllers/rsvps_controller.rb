@@ -3,24 +3,24 @@ class RsvpsController < ApplicationController
 
   def index
     @rsvps = current_user.rsvps
-    render template: "rsvps/index"
+    render :index
    end
 
-   def show
+  def show
     @rsvp = current_user.rsvps.find_by(id: params[:id])
     render :show
   end
 
   def create
-    @rsvp = current_user.rsvps.build(game_id: params[:game_id])
+    @rsvp = Rsvp.new(user_id: current_user.id, game_id: params[:game_id])
 
-      if @rsvp.save
-        render json: { message: "You're in! You're going #{user.first_name} game on #{game.date} at #{game.time}" }
 
-      else
-        render json: { errors: @rsvp.errors.full_messages }, status: :unprocessable_entity
-      end
+    if @rsvp.save
+      render json: { message: "You're in! You're going to #{game.name} on #{game.date} at #{game.time}" }
+    else
+      render json: { errors: @rsvp.errors.full_messages }, status: :unprocessable_entity
     end
+  end
 
     def destroy
       @rsvp = Rsvp.find_by(user_id: current_user.id, game_id: params[:game_id])
