@@ -57,7 +57,7 @@ class GamesController < ApplicationController
       else #sad path
         render json: { errors: @game.errors.full_messages }, status: :unprocessable_entity
       end
-    end
+  end
 
   def destroy
     @game = Game.find(params[:id])
