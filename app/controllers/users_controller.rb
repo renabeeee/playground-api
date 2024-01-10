@@ -20,12 +20,12 @@ class UsersController < ApplicationController
       password: params[:password],
       password_confirmation: params[:password_confirmation]
     )
-    if user.save
-			render json: { message: "Welcome to the team, #{user.first_name}! 🎉" }
-    else
-      render json: { errors: user.errors.full_messages }, status: :bad_request
-    end
-    end
+      if user.save
+        render json: { message: "Welcome to the team, #{user.first_name}! 🎉" }
+      else
+        render json: { errors: user.errors.full_messages }, status: :bad_request
+      end
+  end
 
   def update
     if current_user

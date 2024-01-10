@@ -20,5 +20,6 @@ Rails.application.routes.draw do
   get "/rsvps" => "rsvps#index"
   get "/rsvps/:id" => "rsvps#show"
   post "/rsvps" => "rsvps#create"
+  delete "/rsvps/:id" => "rsvps#destroy"
 
 end
