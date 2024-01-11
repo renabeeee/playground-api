@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   delete "/users/:id" => "users#destroy"
   patch "/users/:id" => "users#update"
 
-  #Sessions Model
+  #sessions Model
   post "/sessions" => "sessions#create"
 
   #rsvps Model
@@ -29,11 +29,15 @@ Rails.application.routes.draw do
   patch "/products/:id" => "products#update"
   delete "/products/:id" => "products#destroy"
 
-  #Product_images Model
+  #product_images Model
   post "/product_image" => "product_images#create"
   patch "/product_images/:id" => "product_images#update"
   delete "/product_images/:id" => "product_images#destroy"
 
+#carted_products Model
+ post "/carted_products" => "carted_products#create"
+ get "/carted_products" => "carted_products#index"
+ patch "/carted_products/:id" => "carted_products#update_quantity"
 
   # #Orders Model
   # get "orders" => "orders#index"
