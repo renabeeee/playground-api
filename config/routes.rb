@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
 
-  #Games Model
+  #games Model
   get "/games" => "games#index"
   get "/games/:id" => "games#show"
   post "/games" => "games#create"
   patch "/games/:id" => "games#update"
   delete "/games/:id" => "games#destroy"
 
-  #Users Model
+  #users Model
   post "/users" => "users#create"
   get "/users/:id" => "users#show"
   delete "/users/:id" => "users#destroy"
@@ -16,10 +16,28 @@ Rails.application.routes.draw do
   #Sessions Model
   post "/sessions" => "sessions#create"
 
-  #Rsvps Model
+  #rsvps Model
   get "/rsvps" => "rsvps#index"
   get "/rsvps/:id" => "rsvps#show"
   post "/rsvps" => "rsvps#create"
   delete "/rsvps/:id" => "rsvps#destroy"
+
+  #products Model
+  get "products" => "products#index"
+  get "products/:id" => "products#show"
+  post "/products" => "products#create"
+  patch "/products/:id" => "products#update"
+  delete "/products/:id" => "products#destroy"
+
+
+
+  #Product_images Model
+  post "/product_image" => "product_images#create"
+  # patch "/product_image/:id" => "product_images]#update"
+
+
+  # #Orders Model
+  # get "orders" => "orders#index"
+  # get "orders/:id" => "orders#show"
 
 end

@@ -3,6 +3,7 @@ class Product < ApplicationRecord
   has_many :carted_products
   has_many :orders, through: :carted_products
 
+
   validates :price, presence: true
   validates :price, numericality: { greater_than: 0}
 
