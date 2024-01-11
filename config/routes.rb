@@ -29,11 +29,10 @@ Rails.application.routes.draw do
   patch "/products/:id" => "products#update"
   delete "/products/:id" => "products#destroy"
 
-
-
   #Product_images Model
   post "/product_image" => "product_images#create"
-  # patch "/product_image/:id" => "product_images]#update"
+  patch "/product_images/:id" => "product_images#update"
+  delete "/product_images/:id" => "product_images#destroy"
 
 
   # #Orders Model
