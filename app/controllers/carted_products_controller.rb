@@ -19,7 +19,7 @@ class CartedProductsController < ApplicationController
     carted_product = current_user.carted_products.find_by(id: params[:id], status: "carted")
 
     if carted_product
-      new_quantity = params[:quantity].to_i  # Assuming quantity is passed in params
+      new_quantity = params[:quantity].to_i
 
       if new_quantity > 0  # Ensure quantity remains positive
         carted_product.update(quantity: new_quantity)

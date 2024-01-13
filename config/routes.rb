@@ -23,8 +23,8 @@ Rails.application.routes.draw do
   delete "/rsvps/:id" => "rsvps#destroy"
 
   #products Model
-  get "products" => "products#index"
-  get "products/:id" => "products#show"
+  get "/products" => "products#index"
+  get "/products/:id" => "products#show"
   post "/products" => "products#create"
   patch "/products/:id" => "products#update"
   delete "/products/:id" => "products#destroy"
@@ -34,10 +34,18 @@ Rails.application.routes.draw do
   patch "/product_images/:id" => "product_images#update"
   delete "/product_images/:id" => "product_images#destroy"
 
-#carted_products Model
- post "/carted_products" => "carted_products#create"
- get "/carted_products" => "carted_products#index"
- patch "/carted_products/:id" => "carted_products#update_quantity"
+  #carted_products Model
+  post "/carted_products" => "carted_products#create"
+  get "/carted_products" => "carted_products#index"
+  patch "/carted_products/:id" => "carted_products#update_quantity"
+
+  #events Model
+   get "/events" => "events#index"
+   get "/events/:id" => "events#show"
+   post "/events" => "events#create"
+   patch "/events/:id" => "events#update"
+   delete "/events/:id" => "events#destroy"
+
 
   # #Orders Model
   # get "orders" => "orders#index"
