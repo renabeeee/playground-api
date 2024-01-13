@@ -46,9 +46,9 @@ Rails.application.routes.draw do
    patch "/events/:id" => "events#update"
    delete "/events/:id" => "events#destroy"
 
-
   # #Orders Model
-  # get "orders" => "orders#index"
-  # get "orders/:id" => "orders#show"
+  get "orders" => "orders#index"
+  get "orders/:id" => "orders#show"
+  post "/orders" => "orders#create"
 
 end

@@ -6,6 +6,11 @@ class OrdersController < ApplicationController
     render :index
   end
 
+  def show
+    @order = current_user.orders.find_by(id: params[:id])
+    render :show
+  end
+
   def create
     carted_products = current_user.carted_products.where(status: "carted")
 
@@ -19,7 +24,7 @@ class OrdersController < ApplicationController
 
   @order = Order.create(
     user_id: current_user.id,
-    # product_id: params[:product_id],
+    product_id: params[:product_id],
     # quantity: params[:quantity],
     subtotal: calculated_subtotal,
     tax: calculated_tax,
