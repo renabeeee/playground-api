@@ -2,22 +2,15 @@ class GamesController < ApplicationController
   # before_action :authenticate_user, except: [:index, :show]
 
   def index
-    query = Game.all
+    @games = Game.all
 
-    if params[:intensity].present?
-      query = query.where(intensity: params[:intensity])
-    end
+    @games = @games.where("location ILIKE ?", "%#{params[:location]}%") if params[:search]
+    @games = @games.where("player_limit = ?", params[:player_limit]) if params[:player_limit]
+    @games = @games.where("intensity ILIKE ?", "%#{params[:intensity]}%") if params[:intensity]
 
-    if params[:player_limit].present?
-      query = query.where(player_limit: params[:player_limit])
-    end
+    @games = @games.order(date: :asc, time: :asc)
 
-    if params[:location].present?
-      query = query.where(location: params[:location])
-    end
-
-    @games = query.all
-    render :index
+    render template: "games/index"
   end
 
   def show
