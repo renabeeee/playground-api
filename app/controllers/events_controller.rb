@@ -3,7 +3,13 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.all
-    render :index
+
+    @events = @events.where("location ILIKE ?", "%#{params[:location]}%") if params[:search]
+    @events = @events.where("date ILIKE ?", "%#{params[:date]}%") if params[:date]
+
+    @events = @events.order(date: :asc, time: :asc)
+
+    render template: "events/index"
   end
 
   def show
