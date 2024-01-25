@@ -10,15 +10,15 @@ class UsersController < ApplicationController
     user = User.new(
       first_name: params[:first_name],
       last_name: params[:last_name],
-      username: params[:username],
-      pronouns: params[:pronouns],
+      # username: params[:username],
+      # pronouns: params[:pronouns],
       email: params[:email],
-      bio: params[:bio],
-      location: params[:location],
-      birthdate: params[:birthdate],
-      experience: params[:experience],
+      # bio: params[:bio],
+      # location: params[:location],
+      # birthdate: params[:birthdate],
+      # experience: params[:experience],
       password: params[:password],
-      password_confirmation: params[:password_confirmation]
+      # password_confirmation: params[:password_confirmation]
     )
       if user.save
         render json: { message: "Welcome to the team, #{user.first_name}! 🎉" }
