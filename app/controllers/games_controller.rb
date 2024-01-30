@@ -44,20 +44,23 @@ class GamesController < ApplicationController
   def update
     @game = Game.find(params[:id])
 
-    unless current_user && current_user.id == @game.user_id
+    unless current_user && current_user.id == @game.user_id || current_user.admin
         render json: { errors: "Unauthorized to update this game" }, status: :unauthorized
         return
     end
 
     @game.update(
-			description: params[:description],
-      location: params[:location],
-      date: params[:date],
-      time: params[:time],
-      intensity: params[:intensity],
-      player_limit: params[:player_limit],
-	    image_url: params[:image_url]
-    )
+  {
+    description: params[:description],
+    location: params[:location],
+    date: params[:date],
+    time: params[:time],
+    intensity: params[:intensity],
+    player_limit: params[:player_limit],
+    image_url: params[:image_url]
+  }.compact
+)
+
 
       if @game.save #happy path
         render :show
