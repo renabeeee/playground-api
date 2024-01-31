@@ -28,7 +28,7 @@ class GamesController < ApplicationController
       intensity: params[:intensity],
       player_limit: params[:player_limit],
       image_url: params[:image_url],
-      description: params[:description],
+      title: params[:title],
   )
     if @game.save #happy path
       current_user.update(status: "Game Leader")
@@ -51,7 +51,7 @@ class GamesController < ApplicationController
 
     @game.update(
   {
-    description: params[:description],
+    title: params[:title],
     location: params[:location],
     date: params[:date],
     time: params[:time],
@@ -60,7 +60,6 @@ class GamesController < ApplicationController
     image_url: params[:image_url]
   }.compact
 )
-
 
       if @game.save #happy path
         render :show

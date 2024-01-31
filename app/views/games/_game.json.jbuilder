@@ -1,5 +1,5 @@
 json.id game.id
-json.description game.description
+json.title game.title
 json.location game.location
 json.date game.date
 json.time game.time
