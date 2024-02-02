@@ -71,7 +71,7 @@ class GamesController < ApplicationController
   def destroy
     @game = Game.find(params[:id])
 
-    unless current_user && current_user.id == @game.user_id
+    unless current_user && current_user.id == @game.user_id || current_user.admin
       render json: { errors: "Unauthorized to delete this game" }, status: :unauthorized
       return
     end

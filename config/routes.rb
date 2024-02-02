@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'password/Reset'
 
   #games Model
   get "/games" => "games#index"
