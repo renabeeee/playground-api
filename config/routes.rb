@@ -48,9 +48,18 @@ Rails.application.routes.draw do
    patch "/events/:id" => "events#update"
    delete "/events/:id" => "events#destroy"
 
-  # #Orders Model
+  # orders Model
   get "orders" => "orders#index"
   get "orders/:id" => "orders#show"
   post "/orders" => "orders#create"
 
+  # password Model
+  resources :users do
+    collection do
+      get :forgot_password
+      post :send_reset_password_instructions
+      get :reset_password
+      patch :update_password
+    end
+  end
 end
