@@ -24,8 +24,13 @@ class RsvpsController < ApplicationController
     end
 
     def destroy
-        @rsvp = Rsvp.find(params[:id])
+      @rsvp = Rsvp.find(params[:id])
+
+      if @rsvp.user == current_user
         @rsvp.destroy
-        render json: { message: "You cancelled your rsvp." }
+        render json: { message: "You cancelled your RSVP." }
+      else
+        render json: { error: "You are not authorized to delete this RSVP." }, status: :unauthorized
       end
+    end
 end
