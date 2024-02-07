@@ -1,4 +1,5 @@
 json.id event.id
+json.name event.name
 json.image_url event.image_url
 json.description event.description
 json.date event.date

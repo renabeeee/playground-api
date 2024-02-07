@@ -1,11 +1,24 @@
 class EventsController < ApplicationController
   before_action :authenticate_user, except: [:index, :show]
 
+  # def index
+  #   @events = Event.all
+
+  #   @events = @events.where("location ILIKE ?", "%#{params[:location]}%") if params[:search]
+  #   @events = @events.where("date ILIKE ?", "%#{params[:date]}%") if params[:date]
+
+  #   @events = @events.order(date: :asc, time: :asc)
+
+  #   render template: "events/index"
+  # end
+  #
+  #
   def index
     @events = Event.all
 
     @events = @events.where("location ILIKE ?", "%#{params[:location]}%") if params[:search]
-    @events = @events.where("date ILIKE ?", "%#{params[:date]}%") if params[:date]
+    @events = @events.where("date = ?", params[:date]) if params[:date]
+    @events = @events.where("time ILIKE ?", "%#{params[:time]}%") if params[:time]
 
     @events = @events.order(date: :asc, time: :asc)
 

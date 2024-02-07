@@ -3,7 +3,7 @@ class User < ApplicationRecord
   has_many :rsvps, dependent: :destroy
   has_many :games, through: :rsvps
   has_many :events, dependent: :destroy
-  belongs_to :rsvp
+  # belongs_to :rsvp
 
   has_many :orders
 	has_many :carted_products
@@ -18,9 +18,8 @@ class User < ApplicationRecord
 
 	has_secure_password
 
-  attr_accessor :password_reset_token, :password_reset_sent_at
+  # attr_accessor :password_reset_token, :password_reset_sent_at
 
-  attribute :google_login, :boolean, default: false
 
 #   def send_password_reset
 #     generate_token(:password_reset_token)

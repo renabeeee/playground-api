@@ -32,10 +32,12 @@ end
   end
 
   def create
+    profile_image = params[:profile_image].present? ? params[:profile_image] : "https://www.shutterstock.com/image-vector/vector-flat-illustration-grayscale-avatar-600nw-2281862025.jpg"
+
     user = User.new(
       first_name: params[:first_name],
       last_name: params[:last_name],
-      profile_image: params[:profile_image],
+      profile_image: profile_image,
       # username: params[:username],
       # pronouns: params[:pronouns],
       email: params[:email],
