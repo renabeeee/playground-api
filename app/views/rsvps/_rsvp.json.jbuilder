@@ -1,5 +1,6 @@
 json.id rsvp.id
-json.user_id rsvp.user_id
-json.game_id rsvp.game_id
+json.game rsvp.game
+json.game rsvp.game
+json.user rsvp.game.user.first_name
 json.created_at rsvp.created_at
 json.updated_at rsvp.updated_at

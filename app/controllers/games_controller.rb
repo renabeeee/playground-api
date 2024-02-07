@@ -22,13 +22,13 @@ class GamesController < ApplicationController
     if current_user
       @game = Game.new(
       user_id: current_user.id,
+      title: params[:title],
       location: params[:location],
       date: params[:date],
       time: params[:time],
       intensity: params[:intensity],
       player_limit: params[:player_limit],
       image_url: params[:image_url],
-      title: params[:title],
   )
     if @game.save #happy path
       current_user.update(status: "Game Leader")

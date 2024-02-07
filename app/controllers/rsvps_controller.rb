@@ -23,9 +23,9 @@ class RsvpsController < ApplicationController
       end
     end
 
-  def destroy
-    @rsvp = Rsvp.find_by(user_id: current_user.id, game_id: params[:game_id])
-    @rsvp.destroy
-      render json: { message: "You've un-rsvp'd to this game." }
-  end
+    def destroy
+        @rsvp = Rsvp.find(params[:id])
+        @rsvp.destroy
+        render json: { message: "You cancelled your rsvp." }
+      end
 end

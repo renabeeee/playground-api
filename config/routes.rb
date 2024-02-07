@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'password_resets/new'
   get 'password/Reset'
 
   #games Model
@@ -14,6 +15,9 @@ Rails.application.routes.draw do
   get "/users/:id" => "users#show"
   delete "/users/:id" => "users#destroy"
   patch "/users/:id" => "users#update"
+  post "/users/google-login" => "users#google_login"
+  post "/users/store_google_data" => "users#store_google_data"
+  patch "/users/store_google_data/:id" => "users#store_google_data"
 
   #sessions Model
   post "/sessions" => "sessions#create"
@@ -53,13 +57,20 @@ Rails.application.routes.draw do
   get "orders/:id" => "orders#show"
   post "/orders" => "orders#create"
 
+  # get "users/forgot-password" => "users#forgot_password"
+
   # password Model
+  resources :password_resets
+
   resources :users do
     collection do
-      get :forgot_password
-      post :send_reset_password_instructions
-      get :reset_password
-      patch :update_password
+  #     get 'forgot_password'
+  #     post 'send_reset_password_instructions'
+  #     get 'reset_password'
+      patch 'update_password'
     end
   end
+  # resources :users, only: [:show]
+
+
 end

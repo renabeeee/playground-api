@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_02_053136) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_07_043857) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -75,6 +75,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_02_053136) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.integer "player_count", default: 0
   end
 
   create_table "orders", force: :cascade do |t|
@@ -126,6 +127,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_02_053136) do
     t.boolean "admin", default: false
     t.string "reset_token"
     t.datetime "reset_token_sent_at"
+    t.string "password_reset_token"
+    t.datetime "password_reset_sent_at"
+    t.string "given_name"
+    t.string "family_name"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
