@@ -20,6 +20,7 @@ class User < ApplicationRecord
 
   attr_accessor :password_reset_token, :password_reset_sent_at
 
+  attribute :google_login, :boolean, default: false
 
 #   def send_password_reset
 #     generate_token(:password_reset_token)
