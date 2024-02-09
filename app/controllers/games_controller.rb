@@ -31,6 +31,7 @@ class GamesController < ApplicationController
       image_url: params[:image_url],
   )
     if @game.save #happy path
+      Rsvp.create(user: current_user, game: @game)
       current_user.update(status: "Game Leader")
       render :show
     else #sad path
@@ -40,6 +41,7 @@ class GamesController < ApplicationController
       render json: { message: "Please login." }, status: :unauthorized
     end
   end
+
 
   def update
     @game = Game.find(params[:id])
