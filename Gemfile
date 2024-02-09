@@ -65,6 +65,8 @@ group :development do
   gem 'jwt'
   gem 'rack-cors'
 
+  gem 'google_maps_service'
+
 end
 
 group :test do

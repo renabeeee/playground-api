@@ -76,7 +76,7 @@ class EventsController < ApplicationController
   def destroy
     @event = Event.find(params[:id])
 
-    unless current_user && current_user.id == @event.user_id
+    unless current_user && current_user.id == @event.user_id || current_user.admin
       render json: { errors: "Unauthorized to delete this game" }, status: :unauthorized
       return
     end

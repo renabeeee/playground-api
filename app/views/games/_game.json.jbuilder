@@ -8,4 +8,7 @@ json.player_limit game.player_limit
 json.image_url game.image_url
 json.created_at game.created_at
 json.updated_at game.updated_at
-json.user game.user.first_name
+json.user do
+  json.first_name game.user.first_name
+  json.profile_image game.user.profile_image
+end
