@@ -64,8 +64,11 @@ group :development do
 
   gem 'jwt'
   gem 'rack-cors'
-
   gem 'google_maps_service'
+  gem 'carrierwave', '~> 2.0'
+  gem 'shrine', '~> 3.3'
+
+
 
 end
 
