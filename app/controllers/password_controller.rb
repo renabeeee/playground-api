@@ -2,13 +2,10 @@ class PasswordController < ApplicationController
 def create
         user = User.find_by(email: params[:email])
         if user
-          # Generate a unique token
           token = SecureRandom.hex(32)
 
-          # Store the token and its association with the user
           user.update(reset_token: token, reset_token_sent_at: Time.current)
 
-          # Send reset email
           UserMailer.with(user: user).password_reset.deliver_now
 
           render json: { message: 'Password reset email sent.' }, status: :ok

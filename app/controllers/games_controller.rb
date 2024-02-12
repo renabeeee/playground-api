@@ -73,8 +73,6 @@ updated_fields = {}
   updated_fields[:player_limit] = params[:player_limit] unless params[:player_limit].blank?
   updated_fields[:image_url] = params[:image_url] unless params[:image_url].blank?
 
-  # Add validation checks here if needed
-
   @game.update(updated_fields)
       if @game.save #happy path
         render :show
@@ -92,7 +90,6 @@ updated_fields = {}
       return
     end
 
-    # Delete associated RSVPs (this line is the key change)
     @game.rsvps.destroy_all
 
     @game.destroy

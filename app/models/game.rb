@@ -22,13 +22,4 @@ class Game < ApplicationRecord
   validates :player_limit, numericality: { only_integer: true, greater_than: 9, less_than_or_equal_to: 15 }
 
   validates :title, :location, :date, :time, :intensity, :player_limit, :image_url, presence: true
-
-
-  #
-  # def update_player_count
-  # active_rsvps_count = rsvps.active.count
-  # update(player_count: active_rsvps_count + 1)
-  # Adding 1 for the game owner
-
-
 end
