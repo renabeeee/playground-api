@@ -26,6 +26,7 @@ class RsvpsController < ApplicationController
     end
 
     def destroy
+
       @rsvp = Rsvp.find(params[:id])
 
       if @rsvp.user == current_user

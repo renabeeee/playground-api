@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  # before_action :authenticate_user, except: [:index, :show]
+  before_action :authenticate_user, except: [:index, :show]
 
   def index
     @games = Game.all
@@ -27,10 +27,10 @@ class GamesController < ApplicationController
       date: params[:date],
       time: params[:time],
       intensity: params[:intensity],
-      player_limit: params[:player_limit],
-      image_url: params[:image_url],
-  )
-  @game.image_url.attach(params[:image]) # Attach the uploaded image
+      player_limit: params[:player_limit].to_i,
+      image_url: params[:image_url]
+      )
+      @game.image = params[:image_url]
 
     if @game.save #happy path
       Rsvp.create(user: current_user, game: @game)
@@ -52,8 +52,6 @@ class GamesController < ApplicationController
         render json: { errors: "Unauthorized to update this game" }, status: :unauthorized
         return
     end
-    @game.image_url.attach(params[:image]) if params[:image] # Update if a new image is uploaded
-
 
 #     @game.update(
 #   {
@@ -85,15 +83,20 @@ updated_fields = {}
       end
   end
 
+
   def destroy
     @game = Game.find(params[:id])
 
-    unless current_user && current_user.id == @game.user_id || current_user.admin
+    unless current_user && (current_user.id == @game.user_id || current_user.admin)
       render json: { errors: "Unauthorized to delete this game" }, status: :unauthorized
       return
     end
 
+    # Delete associated RSVPs (this line is the key change)
+    @game.rsvps.destroy_all
+
     @game.destroy
-    render json: {message: "Your game was deleted."}
+
+    render json: { message: "Your game was deleted." }
   end
 end
