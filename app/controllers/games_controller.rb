@@ -52,34 +52,22 @@ class GamesController < ApplicationController
         render json: { errors: "Unauthorized to update this game" }, status: :unauthorized
         return
     end
+    updated_fields = {}
+      updated_fields[:title] = params[:title] unless params[:title].blank?
+      updated_fields[:location] = params[:location] unless params[:location].blank?
+      updated_fields[:date] = params[:date] unless params[:date].blank?
+      updated_fields[:time] = params[:time] unless params[:time].blank?
+      updated_fields[:intensity] = params[:intensity] unless params[:intensity].blank?
+      updated_fields[:player_limit] = params[:player_limit] unless params[:player_limit].blank?
+      updated_fields[:image_url] = params[:image_url] unless params[:image_url].blank?
 
-#     @game.update(
-#   {
-#     title: params[:title],
-#     location: params[:location],
-#     date: params[:date],
-#     time: params[:time],
-#     intensity: params[:intensity],
-#     player_limit: params[:player_limit],
-#     image_url: params[:image_url]
-#   }.compact
-# )
-updated_fields = {}
-  updated_fields[:title] = params[:title] unless params[:title].blank?
-  updated_fields[:location] = params[:location] unless params[:location].blank?
-  updated_fields[:date] = params[:date] unless params[:date].blank?
-  updated_fields[:time] = params[:time] unless params[:time].blank?
-  updated_fields[:intensity] = params[:intensity] unless params[:intensity].blank?
-  updated_fields[:player_limit] = params[:player_limit] unless params[:player_limit].blank?
-  updated_fields[:image_url] = params[:image_url] unless params[:image_url].blank?
-
-  @game.update(updated_fields)
-      if @game.save #happy path
-        render :show
-      else #sad path
-        render json: { errors: @game.errors.full_messages }, status: :unprocessable_entity
-      end
-  end
+    @game.update(updated_fields)
+        if @game.save #happy path
+          render :show
+        else #sad path
+          render json: { errors: @game.errors.full_messages }, status: :unprocessable_entity
+        end
+    end
 
 
   def destroy

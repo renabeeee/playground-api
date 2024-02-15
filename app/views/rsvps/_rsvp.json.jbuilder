@@ -1,5 +1,6 @@
 json.id rsvp.id
 json.game rsvp.game
+json.game_id rsvp.game_id
 json.user do
   json.first_name rsvp.game.user.first_name
   json.profile_image rsvp.game.user.profile_image
