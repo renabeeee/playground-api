@@ -1,18 +1,17 @@
 class EventsController < ApplicationController
   before_action :authenticate_user, except: [:index, :show]
 
-  # def index
-  #   @events = Event.all
+  def index
+    @events = Event.all
 
-  #   @events = @events.where("location ILIKE ?", "%#{params[:location]}%") if params[:search]
-  #   @events = @events.where("date ILIKE ?", "%#{params[:date]}%") if params[:date]
+    @events = @events.where("location ILIKE ?", "%#{params[:location]}%") if params[:search]
+    @events = @events.where("date ILIKE ?", "%#{params[:date]}%") if params[:date]
 
-  #   @events = @events.order(date: :asc, time: :asc)
+    @events = @events.order(date: :asc, time: :asc)
 
-  #   render template: "events/index"
-  # end
-  #
-  #
+    render template: "events/index"
+  end
+
   def index
     @events = Event.all
 
@@ -66,9 +65,9 @@ class EventsController < ApplicationController
       location: params[:location],
     )
 
-      if @event.save #happy path
+      if @event.save
         render :show
-      else #sad path
+      else
         render json: { errors: @event.errors.full_messages }, status: :unprocessable_entity
       end
     end
