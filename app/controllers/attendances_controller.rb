@@ -1,4 +1,10 @@
 class AttendancesController < ApplicationController
+  before_action :authenticate_user
+
+  def index
+    @attendances = current_user.attendances
+    render :index
+  end
 
    def create
     @event = Event.find(params[:event_id])
