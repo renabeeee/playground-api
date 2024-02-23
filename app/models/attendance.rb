@@ -3,7 +3,7 @@ class Attendance < ApplicationRecord
   belongs_to :event
   has_many :users
 
-  # after_create :update_attendance_count
+  after_create :update_attendance_count
   after_destroy :update_attendance_count
 
   validates :user_id, uniqueness: { scope: :event_id }
