@@ -8,3 +8,6 @@ json.product_images product.product_images
 json.description product.description
 json.created_at product.created_at
 json.updated_at product.updated_at
+json.product_images do
+  json.url product.product_images.url
+end
