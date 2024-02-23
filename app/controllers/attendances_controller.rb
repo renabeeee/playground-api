@@ -1,10 +1,5 @@
 class AttendancesController < ApplicationController
 
-  def index
-    @attendances = current_user.attendances
-    render :index
-   end
-
    def create
     @event = Event.find(params[:event_id])
 
