@@ -20,4 +20,14 @@ class AttendancesController < ApplicationController
       end
     end
 
+    def destroy
+      @attendance = Attendance.find(params[:id])
+
+      if @attendance.user == current_user
+        @attendance.destroy
+        render json: { message: "You cancelled your RSVP to this event." }
+      else
+        render json: { error: "You are not authorized to delete the RSVP to this event." }, status: :unauthorized
+      end
+    end
 end
