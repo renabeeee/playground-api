@@ -28,6 +28,11 @@ Rails.application.routes.draw do
   post "/rsvps" => "rsvps#create"
   delete "/rsvps/:id" => "rsvps#destroy"
 
+   #attendances Model
+   get "/my-events" => "attendances#index"
+   post "/my-events" => "attendances#create"
+
+
   #products Model
   get "/products" => "products#index"
   get "/products/:id" => "products#show"
