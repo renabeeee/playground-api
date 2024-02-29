@@ -6,6 +6,11 @@ class AttendancesController < ApplicationController
     render :index
   end
 
+  def show
+    @attendance = current_user.attendances.find_by(id: params[:id])
+    render :show
+  end
+
    def create
     @event = Event.find(params[:event_id])
 
