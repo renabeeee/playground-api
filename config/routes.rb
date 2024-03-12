@@ -30,6 +30,7 @@ Rails.application.routes.draw do
 
    #attendances Model
    get "/my-events" => "attendances#index"
+   get "/my-events/:id" => "attendances#show"
    post "/my-events" => "attendances#create"
    delete "/my-events/:id" => "attendances#destroy"
 
